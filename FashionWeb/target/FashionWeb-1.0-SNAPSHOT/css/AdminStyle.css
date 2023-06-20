@@ -1,0 +1,55 @@
+body#mainAdmin
+{
+    background-image: url('../img/food-pattern.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.input
+{
+    width: 100%;
+    height: 50px;
+    border: 0px;
+    outline:none;
+    padding: 10px;
+    font-size: 15px;
+}
+
+
+.icon .bi-eye-fill
+{
+    display: none;
+}
+
+.icon.is-active .bi-eye-fill
+{
+    display: block;
+}
+
+.icon.is-active .bi-eye-slash-fill
+{
+    display: none;
+}
+
+body, html {
+    height: 100%;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('../img/HomePage.gif');
+
+    /* Full height */
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body
+{
+    background: #ffffff6e;
+}
