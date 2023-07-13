@@ -41,15 +41,16 @@ public class UpdateAccount extends HttpServlet {
         String pass = request.getParameter("pass");
         String cpass = request.getParameter("cpass");
         String name = request.getParameter("name");
+        String email = request.getParameter("email");
 
         HttpSession session = request.getSession();
         Account acc = (Account) session.getAttribute("NAME");
         
-        System.out.println("after update: " + acc.getAccID() + " - " + user + " - " +  pass + " - " + name +" - " + acc.getRoleID());
+//        System.out.println("after update: " + acc.getAccID() + " - " + user + " - " +  pass + " - " + name +" - " + acc.getRoleID());
 
         if (pass.equals(cpass)) {
             url = "HomeServlet";
-            dao.updateAcc(acc.getAccID(), user, pass, name, acc.getRoleID(), true);
+            dao.updateAcc(acc.getAccID(), user, pass, name,email, acc.getRoleID(), true);
             Account a = dao.getInfoAccByID(acc.getAccID());
             session.setAttribute("NAME", a);
         } else {

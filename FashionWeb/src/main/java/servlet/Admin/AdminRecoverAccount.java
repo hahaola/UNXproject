@@ -25,7 +25,7 @@ public class AdminRecoverAccount extends HttpServlet {
         
         System.out.println("DELETE USER: " + delUser.toString());
 
-        dao.updateAcc(id, delUser.getUsername(), delUser.getPassword(), delUser.getFullname(),delUser.getRoleID(), true);
+        dao.updateAcc(id, delUser.getUsername(), delUser.getPassword(), delUser.getFullname(),delUser.getEmail(),delUser.getRoleID(), true);
         request.getRequestDispatcher("AdminHome").forward(request, response);
     }
 

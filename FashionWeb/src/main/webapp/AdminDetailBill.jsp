@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Order"%>
 <!DOCTYPE html>
@@ -35,7 +36,10 @@
                                         <td class="text-center">${order.OID}</td>
                                         <td class="text-center"> ${order.pid}</td>
                                         <td class="text-center">${order.getOquantity()}</td>
-                                        <td class="text-center">${order.totalMoney}</td>
+                                        <td class="text-center">
+                                            <fmt:setLocale value = "vi_VN"/>
+                                            <fmt:formatNumber value = "${order.totalMoney}" type = "currency"/>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

@@ -10,6 +10,7 @@ public class Account {
     private String username;
     private String password;
     private String fullname;
+    private String email;
     private String roleID;
     private boolean isStatus;
 
@@ -24,6 +25,26 @@ public class Account {
         this.roleID = roleID;
         this.isStatus = isStatus;
     }
+
+    public Account(String accID, String username, String password, String fullname, String email, String roleID, boolean isStatus) {
+        this.accID = accID;
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.roleID = roleID;
+        this.isStatus = isStatus;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
     public String getAccID() {
         return accID;

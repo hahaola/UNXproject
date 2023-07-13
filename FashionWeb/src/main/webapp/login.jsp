@@ -295,16 +295,16 @@
                 <div class="form-container sign-up-container">
                     <form action="RegisterServlet" method="post">
                         <h1>Create Account</h1>
-<!--                        <div class="social-container">
-                            <a href="#" class="social"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="social"><i class="bi bi-google"></i></a>
-                            <a href="#" class="social"><i class="bi bi-instagram"></i></a>
-                        </div>-->
+                        <!--                        <div class="social-container">
+                                                    <a href="#" class="social"><i class="bi bi-facebook"></i></a>
+                                                    <a href="#" class="social"><i class="bi bi-google"></i></a>
+                                                    <a href="#" class="social"><i class="bi bi-instagram"></i></a>
+                                                </div>-->
                         <span>or use your email for registration</span>
                         <input type="text" placeholder="UserName" name="user"/>
-                        <input type="email" placeholder="Email" name ="email"/>
                         <input type="password" placeholder="password" name="pass"/>
                         <input type="password" placeholder="Confirm Password" name="pass1"/>
+                        <input type="email" placeholder="Email" name="email"/>
                         <input type="text" placeholder="Fullname" name="name"/>
                         <button>Sign Up</button>
                     </form>
@@ -312,11 +312,11 @@
                 <div class="form-container sign-in-container">
                     <form action="LoginServlet" method="post">
                         <h1>Sign in</h1>
-<!--                        <div class="social-container">
-                            <a href="#" class="social"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="social"><i class="bi bi-google"></i></a>
-                            <a href="#" class="social"><i class="bi bi-instagram"></i></a>
-                        </div>-->
+                        <!--                        <div class="social-container">
+                                                    <a href="#" class="social"><i class="bi bi-facebook"></i></a>
+                                                    <a href="#" class="social"><i class="bi bi-google"></i></a>
+                                                    <a href="#" class="social"><i class="bi bi-instagram"></i></a>
+                                                </div>-->
                         <span>or use your account</span>
                         <input type="text" placeholder="UserName" name="username" value="<%= uname%>"/>
                         <input type="password" placeholder="Password" name="pass" value="<%= pass%>"/>

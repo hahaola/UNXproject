@@ -30,7 +30,8 @@ public class LoginDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getBoolean(6)
+                        rs.getString(6),
+                        rs.getBoolean(7)
                 ));
             }
         } catch (Exception e) {
@@ -55,7 +56,8 @@ public class LoginDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getBoolean(6)
+                        rs.getString(6),
+                        rs.getBoolean(7)
                 );
             }
 
@@ -65,8 +67,8 @@ public class LoginDAO {
         return null;
     }
 
-    public void NewAcc(String id, String usernamme, String password, String fullname, String roleId, boolean isStatus) {
-        String query = "insert into account values (?,?, ?, ?,?,?)";
+    public void NewAcc(String id, String usernamme, String password, String fullname, String email, String roleId, boolean isStatus) {
+        String query = "insert into account values (?,?, ?, ?,?,?,?)";
         try {
             conn = new DBUtils().makeConnection();
             ps = conn.prepareStatement(query);
@@ -74,8 +76,9 @@ public class LoginDAO {
             ps.setString(2, usernamme);
             ps.setString(3, password);
             ps.setString(4, fullname);
-            ps.setString(5, roleId);
-            ps.setBoolean(6, isStatus);
+            ps.setString(5, email);
+            ps.setString(6, roleId);
+            ps.setBoolean(7, isStatus);
 
             ps.executeUpdate();
         } catch (Exception e) {
@@ -97,7 +100,32 @@ public class LoginDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getBoolean(6));
+                        rs.getString(6),
+                        rs.getBoolean(7));
+            }
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public Account getInfoAccByEmail(String email) {
+        String query = "select * from account where Email=?";
+        try {
+            conn = new DBUtils().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getBoolean(7));
             }
 
         } catch (Exception e) {
@@ -120,7 +148,8 @@ public class LoginDAO {
                         rs.getString(3),
                         rs.getString(4),
                         rs.getString(5),
-                        rs.getBoolean(6));
+                        rs.getString(6),
+                        rs.getBoolean(7));
             }
 
         } catch (Exception e) {
@@ -129,8 +158,8 @@ public class LoginDAO {
         return null;
     }
 
-    public void updateAcc(String id, String usernamme, String password, String fullname, String roleId, boolean isStatus) {
-        String query = "update account set Username = ?, Pass= ?, Fullname= ?, RoleID= ?, StatusAcc= ?  where accID= ?";
+    public void updateAcc(String id, String usernamme, String password, String fullname, String email, String roleId, boolean isStatus) {
+        String query = "update account set Username = ?, Pass= ?, Fullname= ?, RoleID= ?, StatusAcc= ?, Email = ?  where accID= ?";
         try {
             conn = new DBUtils().makeConnection();
             ps = conn.prepareStatement(query);
@@ -138,8 +167,9 @@ public class LoginDAO {
             ps.setString(2, password);
             ps.setString(3, fullname);
             ps.setString(4, roleId);
-            ps.setString(6, id);
+            ps.setString(7, id);
             ps.setBoolean(5, isStatus);
+            ps.setString(6, email);
 
             ps.executeUpdate();
         } catch (Exception e) {

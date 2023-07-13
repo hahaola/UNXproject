@@ -215,11 +215,11 @@
                         <div class="row justify-content-center" >
                             <div class="col-lg-6 rounded-3" >
                                 <h2 class="text-light text-center mt-4">Reset Password</h2>
-                                <span class="text-light">Lost your password? Please enter your username to reset password</span>
+                                <span class="text-light">Lost your password? Please enter your EMAIL to reset password</span>
                                 <form action="ForgetPassword" method="POST">
                                     <div>
-                                        <label for="loginUsername" class="my-2 text-light">Username?</label>
-                                        <input type="text" class="form-control border-dark" value="" name="username">
+                                        <label for="loginUsername" class="my-2 text-light">Email?</label>
+                                        <input type="email" class="form-control border-dark" value="" name="email">
                                     </div>
                                     <div class="gap-3">
                                         <div class="my-2">

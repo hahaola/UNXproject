@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -122,14 +123,20 @@
                                                     <td>Order ID</td>
                                                     <td>Total</td>
                                                     <td>Date Order</td>
+                                                    <td>Address</td>
+                                                    <td>Is Paid</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${billOrder}" var="order">
                                                 <tr>
                                                     <td class="text-center"><a href="DetailBillServlet?oid=${order.OID}" class="text-decoration-none text-danger fw-bold">${order.OID}</a></td>
-                                                    <td class="text-center"> ${order.totalBill}</td>
+                                                    <td class="text-center">                                             
+                                                        <fmt:setLocale value = "vi_VN"/>
+                                                        <fmt:formatNumber value = "${order.totalBill}" type = "currency"/></td>
                                                     <td class="text-center">${order.dateOrder}</td>
+                                                    <td class="text-center">${order.address}</td>
+                                                    <td class="text-center">${order.isShip == true? 'Paid' : 'Not Yet'}</td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

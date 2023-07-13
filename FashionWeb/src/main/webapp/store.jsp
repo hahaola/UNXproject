@@ -263,7 +263,7 @@
                                                                 </c:choose>
                                                             </div>
                                                             <div class="product-btns">
-                                                                <button><a class="add-to-wishlist" href="Work_In_Progress.jsp"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
+                                                                <button><a class="add-to-wishlist" href="AddToWishlist?id=${product.PID}"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
                                                                 <button><a class="quick-view" href="Detail?pid=${product.PID}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
                                                             </div>
                                                         </div>

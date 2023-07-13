@@ -6,6 +6,9 @@ package servlet.Login;
 
 import DAO.LoginDAO;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -15,22 +18,27 @@ import model.Account;
 public class ForgetPassword extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, MessagingException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "";
 
-        String user = request.getParameter("username");
+        String url = "";
+        String link = "http://localhost:8080/FashionWeb/ConfirmResetPassword?token=";
+
+        String user = request.getParameter("email");
         LoginDAO dl = new LoginDAO();
-        Account acc = dl.getInfoAccByUsername(user);
+        Account acc = dl.getInfoAccByEmail(user);
 
         System.out.println("acc in forgetPassord: " + acc);
         if (acc != null) {
             HttpSession session = request.getSession();
             session.setAttribute("acc", acc);
-            url = "ChangePassword.jsp";
+            
+            new RegisterServlet().sendLinkConfirm(acc, "Please click on the below link to reset your password: ", link);
+
+            url = "login.jsp";
         } else {
             request.setAttribute("show", "show");
-            request.setAttribute("ERROR", "<span><i class=\"bi bi-exclamation-triangle-fill\"></i></span> Username isn't exist!");
+            request.setAttribute("ERROR", "<span><i class=\"bi bi-exclamation-triangle-fill\"></i></span> Email isn't exist!");
             url = "forgetPassword.jsp";
         }
 
@@ -51,7 +59,11 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -65,7 +77,11 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ForgetPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,35 +63,8 @@
                             <h2 class="product-name">${productD.nameP}</h2>
                             <div>
                                 <div class="product-rating">
-                                    <i style="color: #000000; z-index: 1">${productD.rating}</i>
-                                    <c:forEach var="i" begin="1" end="${productD.rating}">
-                                        <i class="fa fa-star"></i>
-                                    </c:forEach>
-                                    <c:choose>
-                                        <c:when test="${productD.rating < 5 && productD.rating >=4}"><i class="fa fa-star-o"></i></c:when>
-                                        <c:when test="${productD.rating < 4 && productD.rating >=3}">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </c:when>
-                                        <c:when test="${productD.rating < 3 && productD.rating >=2}">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </c:when>
-                                        <c:when test="${productD.rating < 2 && productD.rating >=1}">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </c:when>
-                                        <c:when test="${productD.rating == 0 && productD.rating < 1}">
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </c:when>
-                                    </c:choose>
+                                    <i style="color: #000000; z-index: 1" id='product-rate'></i>
+
                                 </div>
                                 <a class="review-link" href="#">10 Review(s) | Add your review</a>
                             </div>
@@ -100,15 +73,25 @@
                                 <c:forEach items="${PNew}" var="np">
                                     <c:choose>
                                         <c:when test="${np.PID == productD.PID}">
-                                            <h4 class="product-price">${productD.price/2} <del class="product-old-price">${productD.price}</del></h4>
-                                            </c:when >   
-                                        </c:choose>
-                                    </c:forEach>
+                                            <h4 class="product-price">
+                                                <fmt:setLocale value = "vi_VN"/>
+                                                <fmt:formatNumber value = "${productD.price/2}" type = "currency"/>
+                                                <del class="product-old-price">
+                                                    <fmt:setLocale value = "vi_VN"/>
+                                                    <fmt:formatNumber value = "${productD.price}" type = "currency"/>
+                                                </del>
+                                            </h4>
+                                        </c:when >   
+                                    </c:choose>
+                                </c:forEach>
 
                                 <c:forEach items="${POld}" var="onp">
                                     <c:choose>
                                         <c:when test="${onp.PID == productD.PID}">
-                                            <h4 class="product-price">${productD.price}</h4>
+                                            <h4 class="product-price">
+                                                <fmt:setLocale value = "vi_VN"/>
+                                                <fmt:formatNumber value = "${productD.price}" type = "currency"/>
+                                            </h4>
                                         </c:when >   
                                     </c:choose>
                                 </c:forEach>    
@@ -149,7 +132,7 @@
                             <ul class="tab-nav">
                                 <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                                 <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                                <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                                <li><a data-toggle="tab" href="#tab3">Reviews <span id="number-review"></span></a></li>
                             </ul>
                             <!-- /product tab nav -->
 
@@ -182,35 +165,9 @@
                                         <div class="col-md-3">
                                             <div id="rating">
                                                 <div class="rating-avg">
-                                                    <span>${productD.rating}</span>
-                                                    <c:forEach var="i" begin="1" end="${productD.rating}">
-                                                        <i class="fa fa-star"></i>
-                                                    </c:forEach>
-                                                    <c:choose>
-                                                        <c:when test="${productD.rating < 5 && productD.rating >=4}"><i class="fa fa-star-o"></i></c:when>
-                                                        <c:when test="${productD.rating < 4 && productD.rating >=3}">
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </c:when>
-                                                        <c:when test="${productD.rating < 3 && productD.rating >=2}">
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </c:when>
-                                                        <c:when test="${productD.rating < 2 && productD.rating >=1}">
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </c:when>
-                                                        <c:when test="${productD.rating == 0 && productD.rating < 1}">
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </c:when>
-                                                    </c:choose>
+                                                    <span id='rating-product'></span>
+
+
                                                 </div>
                                                 <ul class="rating">
                                                     <li>
@@ -222,9 +179,9 @@
                                                             <i class="fa fa-star"></i>
                                                         </div>
                                                         <div class="rating-progress">
-                                                            <div style="width: 80%;"></div>
+                                                            <div id='rating-progress-5' style="width: 80%;"></div>
                                                         </div>
-                                                        <span class="sum">3</span>
+                                                        <span id="sum-rating-5">3</span>
                                                     </li>
                                                     <li>
                                                         <div class="rating-stars">
@@ -235,9 +192,9 @@
                                                             <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="rating-progress">
-                                                            <div style="width: 60%;"></div>
+                                                            <div id='rating-progress-4' style="width: 60%;"></div>
                                                         </div>
-                                                        <span class="sum">2</span>
+                                                        <span id="sum-rating-4">2</span>
                                                     </li>
                                                     <li>
                                                         <div class="rating-stars">
@@ -248,9 +205,9 @@
                                                             <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="rating-progress">
-                                                            <div></div>
+                                                            <div id='rating-progress-3'></div>
                                                         </div>
-                                                        <span class="sum">0</span>
+                                                        <span id="sum-rating-3">0</span>
                                                     </li>
                                                     <li>
                                                         <div class="rating-stars">
@@ -261,9 +218,9 @@
                                                             <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="rating-progress">
-                                                            <div></div>
+                                                            <div id='rating-progress-2'></div>
                                                         </div>
-                                                        <span class="sum">0</span>
+                                                        <span id="sum-rating-2">0</span>
                                                     </li>
                                                     <li>
                                                         <div class="rating-stars">
@@ -274,9 +231,9 @@
                                                             <i class="fa fa-star-o"></i>
                                                         </div>
                                                         <div class="rating-progress">
-                                                            <div></div>
+                                                            <div id='rating-progress-1'></div>
                                                         </div>
-                                                        <span class="sum">0</span>
+                                                        <span id="sum-rating-1">0</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -287,61 +244,10 @@
                                         <div class="col-md-6">
                                             <div id="reviews">
                                                 <ul class="reviews">
-                                                    <li>
-                                                        <div class="review-heading">
-                                                            <h5 class="name">John</h5>
-                                                            <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                            <div class="review-rating">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star-o empty"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="review-heading">
-                                                            <h5 class="name">John</h5>
-                                                            <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                            <div class="review-rating">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star-o empty"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="review-heading">
-                                                            <h5 class="name">John</h5>
-                                                            <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                            <div class="review-rating">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star-o empty"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                        </div>
-                                                    </li>
+
                                                 </ul>
                                                 <ul class="reviews-pagination">
-                                                    <li class="active">1</li>
-                                                    <li><a href="#">2</a></li>
-                                                    <li><a href="#">3</a></li>
-                                                    <li><a href="#">4</a></li>
-                                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -351,9 +257,8 @@
                                         <div class="col-md-3">
                                             <div id="review-form">
                                                 <form class="review-form">
-                                                    <input class="input" type="text" placeholder="Your Name">
-                                                    <input class="input" type="email" placeholder="Your Email">
-                                                    <textarea class="input" placeholder="Your Review"></textarea>
+                                                    <input class="input" type="text" placeholder="Your Name" value='${user.username}'>
+                                                    <textarea class="input" placeholder="Your Review" id='comment'></textarea>
                                                     <div class="input-rating">
                                                         <span>Your Rating: </span>
                                                         <div class="stars">
@@ -364,7 +269,7 @@
                                                             <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
                                                         </div>
                                                     </div>
-                                                    <button class="primary-btn">Submit</button>
+                                                    <button class="primary-btn" id="feedback" type='button'>Submit</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -419,7 +324,14 @@
 
                                         <h3 class="product-name"><a href="Detail?pid=${rpn.PID}">${rpn.nameP}</a></h3>
 
-                                        <h4 class="product-price">${rpn.price/2} <del class="product-old-price">${rpn.price}</del></h4>
+                                        <h4 class="product-price">                                                    
+                                            <fmt:setLocale value = "vi_VN"/>
+                                            <fmt:formatNumber value = "${rpn.price/2}" type = "currency"/> 
+                                            <del class="product-old-price">
+                                                <fmt:setLocale value = "vi_VN"/>
+                                                <fmt:formatNumber value = "${rpn.price}" type = "currency"/> 
+                                            </del>
+                                        </h4>
 
                                         <div class="product-rating">
                                             <i style="color: #000000; z-index: 15">${rpn.rating}</i>
@@ -453,7 +365,7 @@
                                             </c:choose>
                                         </div>
                                         <div class="product-btns">
-                                            <button><a class="add-to-wishlist" href="Work_In_Progress.jsp"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
+                                            <button><a class="add-to-wishlist" href="AddToWishlist?id=${rpn.PID}"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
                                             <button><a class="quick-view" href="Detail?pid=${rpn.PID}"><i class="fa fa-eye"></i><span class="tooltipp">View</span></a></button>
                                         </div>
                                     </div>
@@ -483,7 +395,10 @@
 
                                         <h3 class="product-name"><a href="Detail?pid=${rpo.PID}">${rpo.nameP}</a></h3>
 
-                                        <h4 class="product-price">${rpo.price}</h4>
+                                        <h4 class="product-price">
+                                            <fmt:setLocale value = "vi_VN"/>
+                                            <fmt:formatNumber value = "${rpo.price}" type = "currency"/>
+                                        </h4>
 
                                         <div class="product-rating">
                                             <i style="color: #000000; z-index: 15">${rpo.rating}</i>
@@ -517,7 +432,7 @@
                                             </c:choose>
                                         </div>
                                         <div class="product-btns">
-                                            <button><a class="add-to-wishlist" href="Work_In_Progress.jsp"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
+                                            <button><a class="add-to-wishlist" href="AddToWishlist?id=${rpo.PID}"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></a></button>
                                             <button><a class="quick-view" href="Detail?pid=${rpo.PID}"><i class="fa fa-eye"></i><span class="tooltipp">View</span></a></button>
                                         </div>
                                     </div>
@@ -539,13 +454,279 @@
 
         <jsp:include page="Footer.jsp"></jsp:include>
 
-        <!-- jQuery Plugins -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/slick.min.js"></script>
-        <script src="js/nouislider.min.js"></script>
-        <script src="js/jquery.zoom.min.js"></script>
-        <script src="js/main.js"></script>
+            <!-- jQuery Plugins -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/slick.min.js"></script>
+            <script src="js/nouislider.min.js"></script>
+            <script src="js/jquery.zoom.min.js"></script>
+            <script src="js/main.js"></script>
+
+
+            <script>
+                $(document).ready(function ()
+                {
+
+                    getFeedBackPagination('${productD.PID}', 0);
+                    paginationFeedback();
+                    ratingProduct();
+                    setInterval(paginationFeedback, 3000);
+                    setInterval(ratingProduct, 3000);
+
+                });
+
+                function getFeedBackPagination(id, offset)
+                {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:8080/FashionWeb/GetFeedback',
+                        data: {
+                            product_id: id,
+                            offset: offset
+                        },
+                        error: function ()
+                        {
+                            console.log('ERROR');
+                        },
+                        success: function (data)
+                        {
+//                            console.log(data);
+                            $('.reviews').empty();
+                            if (data.length > 0)
+                            {
+                                for (var i = 0; i < data.length; i++)
+                                {
+                                    $('.reviews').append("\n\
+                                                       <li>\n\
+                                                        <div class='review-heading'>\n\
+                                                            <h5 class='name'>" + data[i].acc.username + "</h5>\n\
+                                                            <p class='date'>" + data[i].feedback.createAt + "</p>\n\
+                                                            <div id='review-rating-" + data[i].feedback.id + "'>\n\
+                                                            </div>\n\
+                                                        </div>\n\
+                                                        <div class='review-body'>\n\
+                                                            <p>" + data[i].feedback.comment + "</p>\n\
+                                                        </div>\n\
+                                                    </li>");
+                                    ratingInFeedback(data[i].feedback.rating, data[i].feedback.id);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                function ratingInFeedback(rate, id)
+                {
+                    $('#review-rating-' + id).empty();
+                    if (rate == 0)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>");
+                    }
+
+                    if (rate >= 1 && rate < 1.9)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>");
+                    }
+
+                    if (rate >= 2 && rate < 2.9)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>");
+                    }
+
+                    if (rate >= 3 && rate < 3.9)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star-o'></i>\n\
+                                               <i class='fa fa-star-o'></i>");
+                    }
+
+                    if (rate >= 4 && rate < 4.9)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star-o'></i>");
+                    }
+
+                    if (rate == 5)
+                    {
+                        $('#review-rating-' + id).append("<i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>\n\
+                                               <i class='fa fa-star'></i>");
+                    }
+                }
+
+
+                function paginationFeedback()
+                {
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:8080/FashionWeb/GetAllFeedbackProduct',
+                        data: {
+                            product_id: '${productD.PID}',
+                        },
+                        error: function ()
+                        {
+                            console.log('ERROR');
+                        },
+                        success: function (data)
+                        {
+                            let str = "";
+                            let offset = 0;
+
+                            let id = "${productD.PID}";
+                            $('.reviews-pagination').empty();
+                            if (data.length > 3)
+                            {
+                                let endPage = data.length / 3;
+                                for (var i = 0; i < endPage; i++)
+                                {
+                                    str += "<li id='page-" + (i + 1) + "' " + (i == 0 ? "class='active'" : "") + "><a id='page-text-" + (i + 1) + "' onclick=\"getFeedBackPagination('" + id + "'," + offset + "), activePage(" + (i + 1) + ")\">" + (i + 1) + "</a></li>"
+                                    offset += 3;
+                                }
+                                $('.reviews-pagination').append(str);
+                            }
+                        }
+                    });
+                }
+
+                function activePage(i)
+                {
+                    $('li.active').removeAttr('class');
+                    $('#page-' + i).addClass('active');
+                }
+        </script>
+
+        <script>
+            $("#feedback").on('click', function ()
+            {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:8080/FashionWeb/AddFeedback',
+                    data: {
+                        accID: '${user.accID}',
+                        product_id: '${productD.PID}',
+                        comment: $('#comment').val(),
+                        rating: $('input[name="rating"]:checked').val()
+                    },
+                    error: function ()
+                    {
+                        console.log('ERROR');
+                    },
+                    success: function (data)
+                    {
+                        getFeedBackPagination('${productD.PID}', 0);
+                        activePage(1);
+                    }
+                });
+            })
+        </script>
+
+        <script>
+            function ratingProduct()
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:8080/FashionWeb/GetAllFeedbackProduct',
+                    data: {
+                        product_id: '${productD.PID}',
+                    },
+                    error: function ()
+                    {
+                        console.log('ERROR');
+                    },
+                    success: function (data)
+                    {
+//                        console.log(data);
+                        $('#number-review').empty().append("(" + data.length + ")");
+                        let ratingProduct = 0;
+                        let star = "";
+
+                        let countRating5 = 0;
+                        let countRating4 = 0;
+                        let countRating3 = 0;
+                        let countRating2 = 0;
+                        let countRating1 = 0;
+
+                        for (var i = 0; i < data.length; i++)
+                        {
+                            ratingProduct += data[i].rating;
+
+                            switch (data[i].rating)
+                            {
+                                case 1:
+                                    countRating1++;
+                                    break;
+                                case 2:
+                                    countRating2++;
+                                    break;
+                                case 3:
+                                    countRating3++;
+                                    break;
+                                case 4:
+                                    countRating4++;
+                                    break;
+                                case 5:
+                                    countRating5++;
+                                    break;
+
+                            }
+                        }
+                        if (data.length > 0)
+                        {
+                            ratingProduct = ratingProduct / data.length;
+                        }
+                        for (let i = 0; i < ratingProduct; i++)
+                        {
+                            star += "<i class='fa fa-star'></i>"
+                        }
+                        for (let i = 0; i < (5 - ratingProduct); i++)
+                        {
+                            star += "<i class='fa fa-star-o'></i>"
+                        }
+                        $('#rating-product').empty().append(ratingProduct + " ").append(star);
+                        $('#product-rate').empty().append(ratingProduct + " ").append(star);
+
+//                    console.log(countRating5, countRating4, countRating3 , countRating2 , countRating1);
+
+                        $('#sum-rating-5').empty().append(countRating5);
+                        $('#rating-progress-5').removeAttr('style').css('width', ((countRating5 / data.length) * 100) + '%');
+
+                        $('#sum-rating-4').empty().append(countRating4);
+                        $('#rating-progress-4').removeAttr('style').css('width', ((countRating4 / data.length) * 100) + '%');
+
+                        $('#sum-rating-3').empty().append(countRating3);
+                        $('#rating-progress-3').removeAttr('style').css('width', ((countRating3 / data.length) * 100) + '%');
+
+                        $('#sum-rating-2').empty().append(countRating2);
+                        $('#rating-progress-2').removeAttr('style').css('width', ((countRating2 / data.length) * 100) + '%');
+
+                        $('#sum-rating-1').empty().append(countRating1);
+                        $('#rating-progress-1').removeAttr('style').css('width', ((countRating1 / data.length) * 100) + '%');
+                    }
+                });
+            }
+
+        </script>
 
     </body>
 </html>

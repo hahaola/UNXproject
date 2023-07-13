@@ -20,27 +20,29 @@ public class AdminHome extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         LoginDAO dao = new LoginDAO();
         FashionDAO Rdao = new FashionDAO();
         OrderDAO Odao = new OrderDAO();
 
         ArrayList<Account> al = dao.getAllAcc();
-        
+        List<Role> role = dao.getAllRole();
+
         List<Product> pl = Rdao.getAllProduct();
         List<category> cl = Rdao.getAllCategory();
 
         List<BillOrder> bol = Odao.getAllOrder();
-        
+
         HttpSession session = request.getSession();
-        
+
         session.setAttribute("PRODUCT", pl);
         request.setAttribute("cl", cl);
-        
+
         session.setAttribute("USERLIST", al);
+        session.setAttribute("role", role);
         
         session.setAttribute("billOrder", bol);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("Admin/AdminHome.jsp");
         rd.forward(request, response);
     }

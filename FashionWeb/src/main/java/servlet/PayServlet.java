@@ -1,28 +1,45 @@
 package servlet;
 
+import Config.Config;
 import DAO.*;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.util.*;
 
 import model.*;
+import org.codehaus.jackson.map.ObjectMapper;
 
 @WebServlet(name = "PayServlet", urlPatterns = {"/PayServlet"})
 public class PayServlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("\n---PAY ORDER---");
 
-        response.setContentType("text/html;charset=UTF-8");
+        DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("uuuuMMddHHmmss");
+        DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        System.out.println("\nPAY ORDER");
+        Date date = null;
 
         OrderDAO dao = new OrderDAO();
         FashionDAO d = new FashionDAO();
         HttpSession session = request.getSession();
+
+        String address = String.valueOf(session.getAttribute("address"));
+        System.out.println("address: " + address);
 
         List<Product> pl = (List<Product>) session.getAttribute("listP");
         double total = 0;
@@ -57,105 +74,74 @@ public class PayServlet extends HttpServlet {
 
         if (((acc = (Account) session.getAttribute("NAME")) != null)) {
             if (!pl.isEmpty()) {
-                total = (double) session.getAttribute("total");
-                // save bill of order
-                saveL = new BillOrder(IDOrder(bol), acc.getAccID(), total, null);
-                dao.saveOrder(saveL.getOID(), saveL.getAccID(), saveL.getTotalBill());
+                if (orderReturn(request) == 1) {
+                    total = (double) session.getAttribute("total");
+                    // save bill of order
+                    saveL = new BillOrder(IDOrder(bol), acc.getAccID(), total, null, address);
+                    dao.saveOrder(saveL.getOID(), saveL.getAccID(), saveL.getTotalBill(), address);
 
-                // Order detail of bill
-                for (int j = 0; j < pl.size(); j++) {
-                    //NOT SALE PRODUCT
-                    for (int i = 0; i < allP.size(); i++) {
-                        if (allP.get(i).getPID().equals(pl.get(j).getPID())) {
-                            pl.get(j).setPrice((pl.get(j).getPrice() * pl.get(j).getQuantity()));
-                            System.out.println("Not sale - " + pl.get(j).getNameP() + " - " + (pl.get(j).getPrice()));
+                    // Order detail of bill
+                    for (int j = 0; j < pl.size(); j++) {
+                        //NOT SALE PRODUCT
+                        for (int i = 0; i < allP.size(); i++) {
+                            if (allP.get(i).getPID().equals(pl.get(j).getPID())) {
+                                pl.get(j).setPrice((pl.get(j).getPrice() * pl.get(j).getQuantity()));
+                                System.out.println("Not sale - " + pl.get(j).getNameP() + " - " + (pl.get(j).getPrice()));
+                            }
+                        }
+                        // SALE PRODUCT
+                        for (int i = 0; i < saleList.size(); i++) {
+                            if (saleList.get(i).getPID().equals(pl.get(j).getPID())) {
+                                pl.get(j).setPrice((pl.get(j).getPrice() / 2) * pl.get(j).getQuantity());
+                                System.out.println("sale - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice());
+                            }
+                        }
+
+                        if (ol.isEmpty()) {
+                            System.out.println(IDetailDOrder1(ordertList) + " - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice() + " - " + pl.get(j).getQuantity());
+                            ordertList.add(new Order(IDetailDOrder1(ordertList), pl.get(j).getPID(), pl.get(j).getQuantity(), pl.get(j).getPrice()));
+                        } else {
+                            System.out.println(IDetailDOrder(ol) + " - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice() + " - " + pl.get(j).getQuantity());
+                            ordertList.add(new Order(IDetailDOrder(ol), pl.get(j).getPID(), pl.get(j).getQuantity(), pl.get(j).getPrice()));
                         }
                     }
-                    // SALE PRODUCT
-                    for (int i = 0; i < saleList.size(); i++) {
-                        if (saleList.get(i).getPID().equals(pl.get(j).getPID())) {
-                            pl.get(j).setPrice((pl.get(j).getPrice() / 2) * pl.get(j).getQuantity());
-                            System.out.println("sale - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice());
-                        }
+                    for (Order o : ordertList) {
+                        dao.saveDetailOrder(o.getOID(), o.getPid(), o.getOquantity(), o.getTotalMoney());
                     }
+                    request.setAttribute("vnp_TxnRef", request.getParameter("vnp_TxnRef"));
 
-                    if (ol.isEmpty()) {
-                        System.out.println(IDetailDOrder1(ordertList) + " - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice() + " - " + pl.get(j).getQuantity());
-                        ordertList.add(new Order(IDetailDOrder1(ordertList), pl.get(j).getPID(), pl.get(j).getQuantity(), pl.get(j).getPrice()));
-                    } else {
-                        System.out.println(IDetailDOrder(ol) + " - " + pl.get(j).getNameP() + " - " + pl.get(j).getPrice() + " - " + pl.get(j).getQuantity());
-                        ordertList.add(new Order(IDetailDOrder(ol), pl.get(j).getPID(), pl.get(j).getQuantity(), pl.get(j).getPrice()));
-                    }
-                    System.out.println("ordertList size: " + ordertList.size());
+                    // Create a new Locale
+                    Locale vn = new Locale("vn", "VN");
+                    // Create a formatter given the Locale
+                    NumberFormat vndFormat = NumberFormat.getCurrencyInstance(vn);
+                    request.setAttribute("vnp_Amount", vndFormat.format(Double.parseDouble(request.getParameter("vnp_Amount"))/100));
+
+                    request.setAttribute("vnp_OrderInfo", request.getParameter("vnp_OrderInfo"));
+                    request.setAttribute("vnp_TransactionNo", request.getParameter("vnp_TransactionNo"));
+                    request.setAttribute("vnp_BankCode", request.getParameter("vnp_BankCode"));
+
+                    LocalDateTime expired = LocalDateTime.parse(request.getParameter("vnp_PayDate"), CUSTOM_FORMATTER);
+                    request.setAttribute("vnp_PayDate", expired.format(formater));
+
+                    request.setAttribute("vnp_TransactionStatus", request.getParameter("vnp_TransactionStatus"));
+                    request.setAttribute("signValue", orderReturn(request));
+
+                    request.getRequestDispatcher("order_return.jsp").forward(request, response);
+                    System.out.println("Order Success");
                 }
-                for (Order o : ordertList) {
-                    dao.saveDetailOrder(o.getOID(), o.getPid(), o.getOquantity(), o.getTotalMoney());
-                }
-                url = "OrderServlet";
             } else {
-                System.out.println("Order food first");
-                url = "HomeStoreServlet?page=1&sort=all";
-                request.setAttribute("color", "#f44336");
-                request.setAttribute("message", "<div class=\"alert\">\n"
-                        + "  <span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span> \n"
-                        + "  PLEASE ORDER SOME CLOTHES FIRST\n"
-                        + "</div>");
+
+                request.getRequestDispatcher("ShowCart").forward(request, response);
+                request.setAttribute("msg", "Order First");
             }
         } else {
-            System.out.println("login first");
-            url = "login.jsp";
-            request.setAttribute("show", "show");
-            request.setAttribute("alert", "danger");
-            request.setAttribute("ERROR", "<span><i class=\"bi bi-exclamation-triangle-fill\"></i></span> LOGIN FIRST");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
-        System.out.println("\nOrder Bill: " + saveL);
-        System.out.println("\nOrder detail: ");
         for (Order o : ordertList) {
             System.out.println(o.toString());
         }
-
-        request.getRequestDispatcher(url).forward(request, response);
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
     String IDOrder(List<BillOrder> ol) {
         String id = "O";
@@ -203,5 +189,40 @@ public class PayServlet extends HttpServlet {
             }
         }
         return id + no;
+    }
+
+    private int orderReturn(HttpServletRequest request) {
+        Map fields = new HashMap();
+        for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
+            String name = null;
+            String value = null;
+            try {
+                name = URLEncoder.encode((String) params.nextElement(), StandardCharsets.US_ASCII.toString());
+                value = URLEncoder.encode(request.getParameter(name), StandardCharsets.US_ASCII.toString());
+            } catch (UnsupportedEncodingException e) {
+                System.out.println("Error payment result: " + e.getMessage());
+            }
+            if (name != null && value.length() > 0) {
+                fields.put(name, value);
+            }
+
+            String vnp_SecureHash = request.getParameter("vnp_SecureHash");
+            if (fields.containsKey("vnp_SecureHashType")) {
+                fields.remove("vnp_SecureHashType");
+            }
+            if (fields.containsKey("vnp_SecureHash")) {
+                fields.remove("vnp_SecureHash");
+            }
+
+            String signValue = Config.hashAllFields(fields);
+            if (signValue.equals(vnp_SecureHash)) {
+                if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+        return -1;
     }
 }

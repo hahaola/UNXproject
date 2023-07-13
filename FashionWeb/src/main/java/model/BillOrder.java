@@ -4,21 +4,48 @@
  */
 package model;
 
-
 public class BillOrder {
+
     private String OID;
     private String accID;
     private double totalBill;
     private String dateOrder;
+    private String address;
+    private boolean isShip;
 
     public BillOrder() {
     }
 
-    public BillOrder(String OID, String accID, double totalBill, String date) {
+//    public BillOrder(String OID, String accID, double totalBill, String date) {
+//        this.OID = OID;
+//        this.accID = accID;
+//        this.totalBill = totalBill;
+//        this.dateOrder = date;
+//    }
+    public BillOrder(String OID, String accID, double totalBill, String dateOrder, String address, boolean isShip) {
         this.OID = OID;
         this.accID = accID;
         this.totalBill = totalBill;
-        this.dateOrder = date;
+        this.dateOrder = dateOrder;
+        this.address = address;
+        this.isShip = isShip;
+    }
+
+    public BillOrder(String OID, String accID, double totalBill, String dateOrder, String address) {
+        this.OID = OID;
+        this.accID = accID;
+        this.totalBill = totalBill;
+        this.dateOrder = dateOrder;
+        this.address = address;
+        this.isShip = isShip;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getOID() {
@@ -28,7 +55,6 @@ public class BillOrder {
     public void setOID(String OID) {
         this.OID = OID;
     }
-
 
     public String getAccID() {
         return accID;
@@ -54,10 +80,17 @@ public class BillOrder {
         this.dateOrder = dateOrder;
     }
 
+    public boolean isIsShip() {
+        return isShip;
+    }
+
+    public void setIsShip(boolean isShip) {
+        this.isShip = isShip;
+    }
+
     @Override
     public String toString() {
-        return "BillOrder{" + "OID=" + OID  + ", accID=" + accID + ", totalBill=" + totalBill + ", dateOrder=" + dateOrder + ", Date Order= " + dateOrder +'}';
+        return "BillOrder{" + "OID=" + OID + ", accID=" + accID + ", totalBill=" + totalBill + ", dateOrder=" + dateOrder + ", Date Order= " + dateOrder + '}';
     }
-    
-    
+
 }

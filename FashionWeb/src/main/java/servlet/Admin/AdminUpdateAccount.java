@@ -50,6 +50,7 @@ public class AdminUpdateAccount extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullname = request.getParameter("fullname");
+        String email = request.getParameter("email");
 
         String role = request.getParameter("role");
         String roleID = "";
@@ -64,7 +65,7 @@ public class AdminUpdateAccount extends HttpServlet {
         System.out.println("Update: " + acc.getAccID() + " - " + username + " - " + password + " - " + fullname + " - " + roleID + " - " + status);
         System.out.println("HAS UPDATED");
 
-        dao.updateAcc(acc.getAccID(), username, password, fullname, roleID, true);
+        dao.updateAcc(acc.getAccID(), username, password, fullname,email, roleID, true);
 
         request.getRequestDispatcher("AdminHome").forward(request, response);
     }

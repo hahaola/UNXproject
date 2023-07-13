@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="css/font-awesome.min.css">
 
         <!-- Custom stlylesheet -->
-        <link type="text/css" rel="stylesheet" href="css/   style.css"/>
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
@@ -157,10 +157,10 @@
                             <div class="header-ctn">
                                 <!-- Wishlist -->
                                 <div>
-                                    <a href="#">
+                                    <a href="Wishlist_View/Wishlist.jsp">
                                         <i class="fa fa-heart-o"></i>
                                         <span>Your Wishlist</span>
-                                        <div class="qty"></div>
+                                        <div class="qty" id="wishlist_qty">0</div>
                                     </a>
                                 </div>
                                 <!-- /Wishlist -->
@@ -234,6 +234,36 @@
         <script>
             function hamDropdown() {
                 document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+            }
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>
+            $(document).ready(function ()
+            {
+                setInterval(displayNumberWishlist, 3000);
+            })
+
+            function displayNumberWishlist()
+            {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:8080/FashionWeb/GetAllWishlist',
+                    data: {
+                        user: '${NAME.accID}'
+                    },
+                    error: function ()
+                    {
+                        console.log('ERROR');
+                    },
+                    success: function (data)
+                    {
+//                        console.log(data);
+                        $('#wishlist_qty').empty();
+                        $('#wishlist_qty').append(data.length);
+                    }
+                })
             }
         </script>
 </html>

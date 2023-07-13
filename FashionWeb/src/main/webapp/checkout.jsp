@@ -2,6 +2,7 @@
 <%@page import="model.Product"%>
 <%@page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -77,50 +78,40 @@
                         <div class="col-md-7">
                             <!-- Billing Details -->
                             <div class="billing-details">
-                                <div class="section-title">
-                                    <h3 class="title">Billing address</h3>
+                                <form action="ajaxServlet" method="post">
+                                    <div class="section-title">
+                                        <h3 class="title">Billing address</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="input" type="text" id="fullname" placeholder="Full Name" value="${user.fullname}">
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="text" name="first-name" placeholder="First Name">
+                                    <input class="input" type="email" id="email" placeholder="Email" value="${user.email}">
                                 </div>
                                 <div class="form-group">
-                                    <input class="input" type="text" name="last-name" placeholder="Last Name">
+                                    <input class="input" type="text" id="address" placeholder="Address" name="address_user">
                                 </div>
-                                <div class="form-group">
-                                    <input class="input" type="email" name="email" placeholder="Email">
+                                <div id="msg">
                                 </div>
-                                <div class="form-group">
-                                    <input class="input" type="text" name="address" placeholder="Address">
-                                </div>
-                                <div class="form-group">
-                                    <input class="input" type="text" name="city" placeholder="City">
-                                </div>
-                                <div class="form-group">
-                                    <input class="input" type="text" name="country" placeholder="Country">
-                                </div>
-                                <div class="form-group">
-                                    <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                                </div>
-                                <div class="form-group">
-                                    <input class="input" type="tel" name="tel" placeholder="Telephone">
-                                </div>
-                            </div>
-                            <!-- /Billing Details -->
+                                <button id="place-order" class="primary-btn order-submit" type="submit">Place order</button>
+                            </form>
                         </div>
+                    </div>
 
-                        <!-- Order Details -->
-                        <div class="col-md-5 order-details">
-                            <div class="section-title text-center">
-                                <h3 class="title">Your Order</h3>
+
+                    <!-- Order Details -->
+                    <div class="col-md-5 order-details">
+                        <div class="section-title text-center">
+                            <h3 class="title">Your Order</h3>
+                        </div>
+                        <div class="order-summary">
+                            <div class="order-col">
+                                <div><strong>PRODUCT</strong></div>
+
+                                <div><strong>Total</strong></div>
+
                             </div>
-                            <div class="order-summary">
-                                <div class="order-col">
-                                    <div><strong>PRODUCT</strong></div>
-
-                                    <div><strong>Total</strong></div>
-
-                                </div>
-                                <div class="order-products">
+                            <div class="order-products">
                                 <c:set value="${listP}" var="list"/>
                                 <c:forEach items="${list}" var="p">
                                     <div class="order-col">
@@ -163,12 +154,18 @@
                                             %>
                                             <c:forEach items="${cl}" var="c">
                                                 <c:if  test="${p.PID == c.getPID()}">
-                                                    <p>${(p.price/2) * p.quantity}</p>
+                                                    <p>
+                                                        <fmt:setLocale value = "vi_VN"/>
+                                                        <fmt:formatNumber value = "${(p.price/2) * p.quantity}" type = "currency"/>
+                                                    </p>
                                                 </c:if>
                                             </c:forEach>
                                             <c:forEach items="${oldP}" var="old">
                                                 <c:if  test="${p.PID == old.getPID()}">
-                                                    <p>${(p.price * 1.0) * p.quantity}</p>
+                                                    <p>                                            
+                                                        <fmt:setLocale value = "vi_VN"/>
+                                                        <fmt:formatNumber value = "${(p.price * 1.0) * p.quantity}" type = "currency"/>
+                                                    </p>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
@@ -182,97 +179,11 @@
                             </div>
                             <div class="order-col">
                                 <div><strong>TOTAL</strong></div>
-                                <div><strong class="order-total">${total}</strong></div>
-                            </div>
-                        </div>
-
-                        <div class="payment-method">
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-1" value="bank_direct">
-                                <label for="payment-1">
-                                    <span></span>
-                                    Visa Payment
-                                </label>
-                                <div class="caption">
-                                    <form action="">
-                                        <table style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Card number:</th>
-                                                    <th>Expiration date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="text" name="visa"></td>
-                                                    <td>
-                                                        <input type="month" placeholder="MM">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        Security Code: <input type="number" name="visa">
-
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-2" value="cheque">
-                                <label for="payment-2">
-                                    <span></span>
-                                    Cheque Payment
-                                </label>
-                                <div class="caption">
-                                    <form action=""> 
-                                        <table style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Pay:</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="date">
-                                                    </td>
-                                                    <td><input type="text" name="pay"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <br> <input type="number" placeholder="VND">
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="input-radio">
-                                <input type="radio" name="payment" id="payment-3" value="Paypal">
-                                <label for="payment-3">
-                                    <span></span>
-                                    MasterCard Payment
-                                </label>
-                                <div class="caption">
-                                    <form action="">
-                                        <table style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Card number:</th>
-                                                    <th>Expiration date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><input type="text" name="master"></td>
-                                                    <td>
-                                                        <input type="month" placeholder="MM">
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <br>
-                                        Security Code: <input type="number" name="master">
-
-                                    </form>
+                                <div>
+                                    <strong class="order-total">
+                                        <fmt:setLocale value = "vi_VN"/>
+                                        <fmt:formatNumber value = "${total}" type = "currency"/>
+                                    </strong>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +194,7 @@
                                 I've read and accept the <a href="TermAndCondition.jsp" class="termsAndConditions">terms & conditions</a>
                             </label>
                         </div>
-                        <a href="PayServlet" class="primary-btn order-submit">Place order</a>
+
                     </div>
                     <!-- /Order Details -->
                 </div>
@@ -296,12 +207,66 @@
         <jsp:include page="Footer.jsp"></jsp:include>
 
         <!-- jQuery Plugins -->
-        <script src="js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!--        <script src="js/jquery.min.js"></script>-->
         <script src="js/bootstrap.min.js"></script>
         <script src="js/slick.min.js"></script>
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+
+        <script>
+            let info = false;
+            let checkTerms = false;
+            let fullname = "";
+            let email = "";
+            let address = "";
+            $(document).ready(function () {
+
+                $('#place-order').attr('disabled', true);
+                $("#fullname, #email, #address").on('input', function () {
+                    fullname = $("#fullname").val();
+                    email = $("#email").val();
+                    address = $("#address").val();
+                    console.log();
+                    if (fullname != "" && email != "" && address != "")
+                    {
+                        info = true;
+                    } else
+                    {
+                        info = false;
+                    }
+                });
+
+                $('#terms').change(function ()
+                {
+                    if ($('#terms').is(":checked"))
+                    {
+                        checkTerms = true;
+                    } else
+                    {
+                        checkTerms = false;
+                    }
+                });
+                
+                setInterval(checkFields, 500);
+
+            });
+
+            function checkFields()
+            {
+                if (info && checkTerms)
+                {
+                    $('#place-order').removeAttr('disabled');
+                } else
+                {
+                    $('#place-order').attr('disabled', true);
+                }
+
+
+            }
+
+        </script>
     </body>
 </html>
 

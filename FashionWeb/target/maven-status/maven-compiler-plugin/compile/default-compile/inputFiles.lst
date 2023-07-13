@@ -1,44 +1,65 @@
-D:\Only Java\FashionWeb\src\main\java\servlet\PayServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\StoreCategoryServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\HomeStoreServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\HomeServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\LoginServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\BillOrder\DetailBillServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminUpdateAccount.java
-D:\Only Java\FashionWeb\src\main\java\model\category.java
-D:\Only Java\FashionWeb\src\main\java\DAO\FashionDAO.java
-D:\Only Java\FashionWeb\src\main\java\model\Order.java
-D:\Only Java\FashionWeb\src\main\java\servlet\DetailProduct\Detail.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminRecoverProduct.java
-D:\Only Java\FashionWeb\src\main\java\filter\AuthFilter.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminShowProduct.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminUpdateProduct.java
-D:\Only Java\FashionWeb\src\main\java\servlet\BillOrder\BillShowServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\ShowCart.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminDetailBillServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\LogoutServlet.java
-D:\Only Java\FashionWeb\src\main\java\model\Account.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminShowCategory.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\ChangePassword.java
-D:\Only Java\FashionWeb\src\main\java\servlet\OrderServlet.java
-D:\Only Java\FashionWeb\src\main\java\model\Role.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminDeleteAccount.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\RegisterServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\SubtractCartServlet.java
-D:\Only Java\FashionWeb\src\main\java\connect\DBUtils.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminAddCategory.java
-D:\Only Java\FashionWeb\src\main\java\servlet\CartServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminAddNewProduct.java
-D:\Only Java\FashionWeb\src\main\java\servlet\SearchProductServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\UpdateAccount.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminDeleteProduct.java
-D:\Only Java\FashionWeb\src\main\java\model\Product.java
-D:\Only Java\FashionWeb\src\main\java\servlet\SortStoreServlet.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminAddNewAccount.java
-D:\Only Java\FashionWeb\src\main\java\DAO\OrderDAO.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminHome.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Login\ForgetPassword.java
-D:\Only Java\FashionWeb\src\main\java\DAO\LoginDAO.java
-D:\Only Java\FashionWeb\src\main\java\servlet\Admin\AdminRecoverAccount.java
-D:\Only Java\FashionWeb\src\main\java\servlet\RemoveProduct.java
-D:\Only Java\FashionWeb\src\main\java\model\BillOrder.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminDetailBillServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\SmtpAuthenticator.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\filter\AuthFilter.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\BillOrder\BillShowServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\OrderServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\FeedbackController\GetAllFeedbackProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\LogoutServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\ConfirmToken.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminShowCategory.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\LoginServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminChangeOrderShip.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\WishlistController\GetAllWishlist.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\ConfirmTokenServlet\Re_ConfirmResetPassword.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\FashionDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\Config\Config.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\ChangePassword.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\WishlistController\AddToWishlist.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Order.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminAddNewProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\FeedbackController\AddFeedback.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminAddNewAccount.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\UpdateAccount.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\RegisterServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminHome.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\category.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Feedback.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\SortStoreServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\FeedbackController\GetFeedback.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Account.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\BillOrder.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Product.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\BillOrder\DetailBillServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\WishlistController\RemoveFromWishlist.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\HomeServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\OrderDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\ShowCart.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\HomeStoreServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\StoreCategoryServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminUpdateAccount.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminShowProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\PayServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\VnpayServlet\ajaxServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\DetailProduct\Detail.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\ConfirmTokenServlet\Re_Confirm.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\ConfirmTokenDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminUpdateProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\WishlistDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\ConfirmTokenServlet\ConfirmResetPassword.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\SearchProductServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminDeleteAccount.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminRecoverAccount.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\ConfirmTokenServlet\Confirm.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\connect\DBUtils.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Login\ForgetPassword.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Wishlist.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\CartServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\LoginDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\SubtractCartServlet.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\RemoveProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\DAO\FeedbackDAO.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\model\Role.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminAddCategory.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminRecoverProduct.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminChart.java
+E:\Project\Makemoney\UNXproject\FashionWeb\src\main\java\servlet\Admin\AdminDeleteProduct.java

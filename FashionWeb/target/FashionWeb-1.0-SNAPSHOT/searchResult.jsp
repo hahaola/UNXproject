@@ -1,7 +1,9 @@
+<%@page import="java.text.NumberFormat"%>
 <%@page import="DAO.FashionDAO"%>
 <%@page import="model.Product"%>
 <%@page import="model.category"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -101,6 +103,8 @@
                             <h3 class="aside-title">New Product</h3> 
                             <%
                                 List<Product> pl = d.getNewProduct();
+                                Locale vn = new Locale("vi", "VN");
+                                NumberFormat vndFormat = NumberFormat.getCurrencyInstance(vn);
                             %>
                             <%  for (Product p : pl) {%>
                             <% if (p.isStock() == true) {%>
@@ -116,7 +120,7 @@
                                     <%}%>
                                     <% }%>
                                     <h3 class="product-name"><a href="Detail?pid=<%=p.getPID()%>"><%=p.getNameP()%></a></h3>
-                                    <h4 class="product-price"> <%=p.getPrice() / 2%> <del class="product-old-price"> <%=p.getPrice()%> </del></h4>
+                                    <h4 class="product-price"> <%= vndFormat.format(p.getPrice() / 2)%> <del class="product-old-price"> <%=vndFormat.format(p.getPrice())%> </del></h4>
                                 </div>
                             </div>
                             <%}%>
@@ -133,7 +137,7 @@
                         <!-- store products -->
                         <div class="row">
                             <!-- product -->
-                            
+
 
                             <c:forEach items="${listP}" var="product" >
                                 <c:if test="${product.stock == true}">
@@ -154,12 +158,22 @@
                                                 <h3 class="product-name"><a href="Detail?pid=${product.PID}">${product.nameP}</a></h3>
                                                     <c:forEach items="${newP}" var="np">
                                                         <c:if test="${product.PID == np.PID}">
-                                                        <h4 class="product-price">${product.price/2} <del class="product-old-price">${product.price}</del></h4>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                    <c:forEach items="${oldP}" var="op">
-                                                        <c:if test="${product.PID == op.PID}">
-                                                        <h4 class="product-price">${product.price}</h4>
+                                                        <h4 class="product-price">
+                                                            <fmt:setLocale value = "vi_VN"/>
+                                                            <fmt:formatNumber value = "${product.price/2}" type = "currency"/> 
+                                                            <del class="product-old-price">
+                                                                <fmt:setLocale value = "vi_VN"/>
+                                                                <fmt:formatNumber value = "${product.price}" type = "currency"/> 
+                                                            </del>
+                                                        </h4>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:forEach items="${oldP}" var="op">
+                                                    <c:if test="${product.PID == op.PID}">
+                                                        <h4 class="product-price">
+                                                            <fmt:setLocale value = "vi_VN"/>
+                                                            <fmt:formatNumber value = "${product.price}" type = "currency"/> 
+                                                        </h4>
                                                     </c:if>
                                                 </c:forEach>
 

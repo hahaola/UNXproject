@@ -20,6 +20,7 @@ public class AdminAddNewAccount extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullname = request.getParameter("fullname");
+        String email = request.getParameter("email");
 
         LoginDAO d = new LoginDAO();
         ArrayList<Account> ls = d.getAllAcc();
@@ -30,7 +31,7 @@ public class AdminAddNewAccount extends HttpServlet {
             url = "AdminAddNewAccount.jsp";
         } else {
             System.out.println(autoIncreaseID(ls));
-            d.NewAcc(autoIncreaseID(ls), username, password, fullname, "R01", true);
+            d.NewAcc(autoIncreaseID(ls), username, password, fullname,email, "R01", true);
             System.out.println("ADD ACCOUNT: " + username + " - " + password + " - " + fullname + " - " + "R01");
             url = "AdminHome";
         }

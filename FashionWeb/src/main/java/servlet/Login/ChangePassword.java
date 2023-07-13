@@ -30,7 +30,7 @@ public class ChangePassword extends HttpServlet {
         if (a != null) {
             if (pass.equals(cpass)) {
                 url = "login.jsp";
-                d.updateAcc(a.getAccID(), a.getUsername(), pass, a.getFullname(), a.getRoleID(),true);
+                d.updateAcc(a.getAccID(), a.getUsername(), pass, a.getFullname(),a.getEmail(), a.getRoleID(),true);
                 System.out.println("HAS CHANGE PASSWORD");
             } else {
                 url = "ChangePassword.jsp";

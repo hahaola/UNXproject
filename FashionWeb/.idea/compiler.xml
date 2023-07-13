@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="FashionWeb" options="-endorseddirs &quot;D:\Only Java\FashionWeb\target/endorsed&quot;" />
+      <module name="FashionWeb" options="-endorseddirs &quot;E:\Project\Làm bài phụ\UNXproject\FashionWeb\target/endorsed&quot;" />
     </option>
   </component>
 </project>

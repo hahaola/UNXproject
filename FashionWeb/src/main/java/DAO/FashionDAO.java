@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -274,6 +274,22 @@ public class FashionDAO {
         return list;
     }
 
+    public category getCategoryById(String id) {
+        String query = "select * from category where Category_id = ? ";
+        try {
+            conn = new DBUtils().makeConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new category(rs.getString(1), rs.getString(2));
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
     public List<category> getThreeCategory() {
         List<category> list = new ArrayList<>();
         String query = "select top 3 * from category order by Category_id DESC";
@@ -447,7 +463,7 @@ public class FashionDAO {
         }
         return list;
     }
-    
+
     public List<Product> searchProductByName(String name) {
         List<Product> list = new ArrayList<>();
         String query = "select * from product where Name_Product like ? order by Product_id ASC ";
@@ -547,8 +563,8 @@ public class FashionDAO {
         } catch (Exception e) {
         }
     }
-    
-        public void deleteProduct(boolean stock, String id) {
+
+    public void deleteProduct(boolean stock, String id) {
         String query = "update product set Stock = ? where Product_id = ?";
         try {
             conn = new DBUtils().makeConnection();
@@ -560,6 +576,5 @@ public class FashionDAO {
         } catch (Exception e) {
         }
     }
-
 
 }

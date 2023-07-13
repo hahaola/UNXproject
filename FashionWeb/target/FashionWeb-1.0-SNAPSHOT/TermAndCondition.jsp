@@ -29,21 +29,46 @@
                 </div>
             </div>
         </div>
+        <form action="ajaxServlet" method="post">
+            <input name="test"/>
+            <button type="submit" id="show">show</button>
+        </form>
+
+
+
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
         <script>
-            function displayFunc()
-            {
-                var check = document.getElementById("checkBox");
-                var img = document.getElementById("image");
-                console.log(check);
-                if(check.checked === true)
-                {
-                    img.style.display = "block";
-                }
-                else
-                {
-                    img.style.display = "none";
-                }
-            }
+                            function displayFunc()
+                            {
+                                var check = document.getElementById("checkBox");
+                                var img = document.getElementById("image");
+                                console.log(check);
+                                if (check.checked === true)
+                                {
+                                    img.style.display = "block";
+                                } else
+                                {
+                                    img.style.display = "none";
+                                }
+                            }
         </script>
+
+        <!--        <script>
+                    $('#show').on('click', function()
+                    {
+                        $.ajax({
+                           type: 'get',
+                           url: 'http://localhost:8080/FashionWeb/ajaxServlet',
+                           data:{},
+                           error: function()
+                           {
+                               console.log('error');
+                           },
+                           success: function(data){
+                               console.log(data);
+                           }
+                        });
+                    })
+                </script>-->
     </body>
 </html>

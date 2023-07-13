@@ -2,6 +2,7 @@
 <%@page import="model.Product"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Order"%>
 <!DOCTYPE html>
@@ -92,7 +93,11 @@
                                             </c:if>
                                         </c:forEach>
 
-                                        <td class="text-center">${product.price}</td>
+                                        <td class="text-center">
+
+                                            <fmt:setLocale value = "vi_VN"/>
+                                            <fmt:formatNumber value = "${product.price}" type = "currency"/>
+                                        </td>
 
                                         <td class="text-center"><img src="${product.image}" alt="image${product.nameP}" style="width: 100px"/></td>    
 

@@ -39,6 +39,11 @@
                             <label class="form-label text-dark">Full Name</label>
                             <input type="text" class="form-control border border-2" name="fullname" value="" required>                                                                
                         </div>
+                        
+                        <div class="my-3">
+                            <label class="form-label text-dark">Email</label>
+                            <input type="email" class="form-control border border-2" name="email" value="" required>                                                                
+                        </div>
 
                         <div class="text-center my-3">
                             <button type="submit" class="btn btn-outline-primary" name="submit">Add</button>

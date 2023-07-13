@@ -38,6 +38,10 @@
                             <label class="form-label fw-bold">Full Name</label>
                             <input type="text" class="form-control border border-2" name="fullname" value="${u.fullname}">                                                                
                         </div>
+                        <div class="my-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <input type="email" class="form-control border border-2" name="email" value="${u.fullname}">                                                                
+                        </div>
 
                         <div class="my-3">
                             <label class="form-label fw-bold">Role</label>

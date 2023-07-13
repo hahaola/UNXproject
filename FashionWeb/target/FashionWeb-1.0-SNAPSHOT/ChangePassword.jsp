@@ -213,15 +213,15 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-6 rounded-3" >
                                 <h2 class="text-light text-center mt-4">Reset Password</h2>
-                                <h5 class="text-light">User: ${acc.username}</h5>
+                                <h5 class="text-light">Email: ${acc.email}</h5>
                                 <form action="ChangePassword" method="POST">
                                     <div>
                                         <label class="my-2 text-light">New Password</label>
-                                        <input type="text" class="form-control border-dark" value="" name="pass">
+                                        <input type="password" class="form-control border-dark" value="" name="pass">
                                     </div>
                                     <div>
                                         <label class="my-2 text-light">Confirm Password</label>
-                                        <input type="text" class="form-control border-dark" value="" name="cpass">
+                                        <input type="password" class="form-control border-dark" value="" name="cpass">
                                     </div>
                                     <div class="gap-3">
                                         <div class="my-2">
